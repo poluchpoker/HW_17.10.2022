@@ -31,7 +31,6 @@ public class Number2 {
                     System.out.println("Введите слово заново, пока длина его не станет больше предыдущего: ");
                     word = inp.nextLine();
                 }
-
             }
             if (word.equals(random_word)) {
                 output = random_word;
@@ -47,6 +46,7 @@ public class Number2 {
             System.out.println("Введите слово: ");
             word = inp.nextLine();
         }while (cnt != random_word.length());
+        
         System.out.printf("Вы угадали слово - %s, поздравляю!", output);
     }
 }
