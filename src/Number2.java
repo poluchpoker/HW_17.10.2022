@@ -1,7 +1,7 @@
 import java.util.Random;
 import java.util.Scanner;
 
-public class Number2 {
+public class Number3 {
     static Scanner inp = new Scanner(System.in);
 
     public static void main(String[] args) {
@@ -22,7 +22,7 @@ public class Number2 {
         String output = "";
         String symbol = "#";
 
-        do{
+        OUTERMOST: do{
             if (cnt >= word.length()){
                 String word1 = word;
                 System.out.println("Введите слово заново, пока длина его не будет больше предыдущего: ");
@@ -32,13 +32,21 @@ public class Number2 {
                     word = inp.nextLine();
                 }
             }
-            if (word.equals(random_word)) {
+            else if (word.equals(random_word)) {
                 output = random_word;
                 break;
             }
-            if (word.charAt(cnt) == random_word.charAt(cnt)){
-                output = output.substring(0, cnt) + random_word.charAt(cnt);
-                cnt += 1;
+            else if (word.charAt(cnt) == random_word.charAt(cnt) && word.substring(0, cnt).equals(random_word.substring(0, cnt))){
+                while (word.charAt(cnt) == random_word.charAt(cnt)){
+                    output = output.substring(0, cnt) + random_word.charAt(cnt);
+                    cnt += 1;
+                    if (output.equals(random_word)){
+                        cnt = random_word.length();
+                        System.out.println("Внутри вашего слова содержится угадываемое, считайте, что повезло.");
+                        break OUTERMOST;
+                    }
+                    if (cnt >= word.length()) break;
+                }
                 System.out.println(output + symbol.repeat(15 - cnt));
             }else{
                 System.out.println(output + symbol.repeat(15 - cnt));
@@ -46,7 +54,7 @@ public class Number2 {
             System.out.println("Введите слово: ");
             word = inp.nextLine();
         }while (cnt != random_word.length());
-        
+
         System.out.printf("Вы угадали слово - %s, поздравляю!", output);
     }
 }
